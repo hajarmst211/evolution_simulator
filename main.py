@@ -22,14 +22,14 @@ def main():
     rockets = generate_rockets()
     running = True
     frames = 0
+    generation =1
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        if frames < max_frames:
-
-            
+        if frames < max_frames:            
             screen.fill((105,105,105))
             obstacle.draw_obstacle(screen)
             reward.draw_reward(screen)
@@ -37,14 +37,18 @@ def main():
             pygame.display.flip()
             clock.tick(60)  
             frames += 1
-            print(f"Frame: {frames}")
-            rockets = create_new_generation(rockets, reward)
 
 
         else:
+            print("------------------------------------")
+            print(f"Generation {generation} complete")
             best_rocket, best_score = get_best_rocket(rockets, reward)
             print(f"Best Score: {best_score}")
+            rockets = create_new_generation(rockets, reward)
             frames = 0
+            generation += 1
+            clock.tick(120)  
+
 
     quit()
 

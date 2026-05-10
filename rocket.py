@@ -53,6 +53,8 @@ class Rocket():
         distance_to_reward = np.linalg.norm(self.position - reward.position)
         score = 1 / (distance_to_reward + 1e-6)  
         return score
+    
+    
 
 def create_random_dna(number_of_frames):
     dna = np.array([pygame.Vector2(random.randint(-1,1), random.randint(-1,1)) for _ in range(number_of_frames)])
@@ -111,4 +113,5 @@ def get_best_rocket(rockets, reward):
     scores = get_scores(rockets, reward)
     best_index = np.argmax(scores)
     return rockets[best_index], scores[best_index]
+
 
